@@ -1,0 +1,66 @@
+:root {
+    --primary: #1a56db;
+    --accent: #25d366;
+    --dark: #1e293b;
+    --light: #f8fafc;
+}
+
+body {
+    font-family: 'Segoe UI', system-ui, sans-serif;
+    background: #e2e8f0;
+    margin: 0;
+    display: flex;
+    justify-content: center;
+    padding: 15px;
+}
+
+.app-container {
+    background: white;
+    width: 100%;
+    max-width: 450px;
+    border-radius: 24px;
+    padding: 25px;
+    box-shadow: 0 20px 25px -5px rgba(0,0,0,0.1);
+}
+
+h1 { color: var(--dark); font-size: 1.5rem; margin-bottom: 5px; text-align: center; }
+.subtitle { text-align: center; margin-top: 0; color: #64748b; font-size: 0.9rem; }
+
+.inputs { display: flex; gap: 10px; margin: 20px 0; }
+.input-box { flex: 1; }
+.input-box label { display: block; font-size: 0.8rem; font-weight: bold; margin-bottom: 5px; }
+input { width: 100%; padding: 12px; border: 2px solid #e2e8f0; border-radius: 12px; font-size: 1rem; box-sizing: border-box; }
+
+h3 { font-size: 0.9rem; text-transform: uppercase; color: #64748b; margin-bottom: 10px; }
+.grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(70px, 1fr)); gap: 10px; margin-bottom: 20px; }
+
+button {
+    padding: 12px 5px;
+    border: none;
+    border-radius: 12px;
+    background: var(--primary);
+    color: white;
+    font-weight: bold;
+    cursor: pointer;
+    transition: transform 0.1s;
+}
+
+button:active { transform: scale(0.95); }
+
+.result-area {
+    background: var(--light);
+    border-radius: 16px;
+    padding: 20px;
+    margin-top: 20px;
+    border: 1px solid #e2e8f0;
+    animation: fadeIn 0.3s ease;
+}
+
+.share-bar { display: flex; gap: 10px; margin-top: 15px; }
+.btn-copy { flex: 1; background: #64748b; }
+.btn-wa { flex: 1; background: var(--accent); }
+
+.hidden { display: none; }
+footer { text-align: center; margin-top: 25px; color: #cbd5e1; font-size: 0.7rem; cursor: pointer; }
+
+@keyframes fadeIn { from { opacity: 0; transform: translateY(10px); } to { opacity: 1; transform: translateY(0); } }
