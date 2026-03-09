@@ -1,44 +1,61 @@
-const DIAS_ANIO = 365;
-const DIAS_MES = 30.417; // Promedio real (365/12)
+const D_ANIO = 365;
+const D_MES = 30.417;
 
-function procesar(op, factor) {
-    let d = parseInt(document.getElementById('inputDias').value) || 0;
-    let m = parseInt(document.getElementById('inputMeses').value) || 0;
-    let a = parseInt(document.getElementById('inputAnos').value) || 0;
+// Validaciones en tiempo real
+document.getElementById('inputMeses').addEventListener('input', (e) => {
+    if (e.target.value > 12) e.target.value = 12;
+});
+document.getElementById('inputDias').addEventListener('input', (e) => {
+    if (e.target.value > 31) e.target.value = 31;
+});
 
-    // Convertir todo a días totales
-    let totalEnDias = d + (m * DIAS_MES) + (a * DIAS_ANIO);
+function desglosar(totalDias) {
+    let a = Math.floor(totalDias / D_ANIO);
+    let restoA = totalDias % D_ANIO;
+    let m = Math.floor(restoA / D_MES);
+    let d = Math.round(restoA % D_MES);
     
-    // Aplicar operación
-    let calculo = (op === 'div') ? (totalEnDias / factor) : (totalEnDias * factor);
-
-    // Redondeo más favorable (Techo)
-    let finalDiasTotal = Math.ceil(calculo);
-
-    // Desglosar
-    let resAnos = Math.floor(finalDiasTotal / DIAS_ANIO);
-    let restoAnos = finalDiasTotal % DIAS_ANIO;
-    let resMeses = Math.floor(restoAnos / DIAS_MES);
-    let resDias = Math.round(restoAnos % DIAS_MES);
-
-    // Formato solicitado: Día, Mes, Año
-    const format = `${resDias} días, ${resMeses} meses, ${resAnos} años`;
-    
-    document.getElementById('resText').innerText = format;
-    document.getElementById('resultArea').classList.remove('hidden');
+    // Formato Año, Mes, Día
+    return `${a} años, ${m} meses, ${d} días`;
 }
 
-function copyRes() {
-    const txt = document.getElementById('resText').innerText;
-    navigator.clipboard.writeText(txt).then(() => alert("Copiado al portapapeles"));
+function calcular(operacion, factor) {
+    let an = parseInt(document.getElementById('inputAnos').value) || 0;
+    let me = parseInt(document.getElementById('inputMeses').value) || 0;
+    let di = parseInt(document.getElementById('inputDias').value) || 0;
+
+    let diasOriginales = di + (me * D_MES) + (an * D_ANIO);
+    let variacionDias;
+
+    if (operacion === 'div') {
+        variacionDias = Math.ceil(diasOriginales / factor);
+        var totalFinalDias = diasOriginales - variacionDias;
+    } else {
+        variacionDias = Math.ceil(diasOriginales * (factor - 1));
+        var totalFinalDias = diasOriginales + variacionDias;
+    }
+
+    document.getElementById('variacionText').innerText = desglosar(variacionDias);
+    document.getElementById('finalText').innerText = desglosar(totalFinalDias);
+    document.getElementById('resultWrapper').classList.remove('hidden');
 }
 
-function shareWA() {
-    const txt = encodeURIComponent("Fraccionamiento de tiempo: " + document.getElementById('resText').innerText);
-    window.open(`https://wa.me/?text=${txt}`, '_blank');
+function resetAll() {
+    document.querySelectorAll('input').forEach(i => i.value = '');
+    document.getElementById('resultWrapper').classList.add('hidden');
+}
+
+function copy() {
+    const res = document.getElementById('finalText').innerText;
+    navigator.clipboard.writeText("Resultado: " + res);
+    alert("Copiado");
+}
+
+function share() {
+    const text = encodeURIComponent("Fraccionador de años - Resultado: " + document.getElementById('finalText').innerText);
+    window.open(`https://wa.me/?text=${text}`, '_blank');
 }
 
 function easterEgg() {
-    console.log("Secret unlocked!");
     alert("Esta es la primera App que creó Víctor Siu");
 }
