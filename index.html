@@ -3,71 +3,70 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
-    <title>Calculadora de Tiempo - Víctor Siu</title>
+    <title>Fraccionador de años</title>
     <link rel="stylesheet" href="style.css">
     <link rel="manifest" href="manifest.json">
     <link rel="icon" href="logo.png" type="image/png">
     <link rel="apple-touch-icon" href="logo.png">
-    <meta name="theme-color" content="#1a56db">
+    <meta name="theme-color" content="#4f46e5">
     <meta name="apple-mobile-web-app-capable" content="yes">
 </head>
 <body>
-    <div class="app-container">
+    <div class="glass-container">
         <header>
-            <h1>Fraccionador Temporal</h1>
-            <p class="subtitle">Año Natural (365 días)</p>
+            <h1>Fraccionador de años</h1>
         </header>
 
-        <section class="inputs">
-            <div class="input-box">
-                <label>Días</label>
-                <input type="number" id="inputDias" value="0" min="0">
-            </div>
-            <div class="input-box">
-                <label>Meses</label>
-                <input type="number" id="inputMeses" value="0" min="0">
-            </div>
-            <div class="input-box">
+        <section class="input-section">
+            <div class="input-card">
                 <label>Años</label>
-                <input type="number" id="inputAnos" value="0" min="0">
+                <input type="number" id="inputAnos" placeholder="0" min="0">
+            </div>
+            <div class="input-card">
+                <label>Meses</label>
+                <input type="number" id="inputMeses" placeholder="0" min="0" max="12">
+            </div>
+            <div class="input-card">
+                <label>Días</label>
+                <input type="number" id="inputDias" placeholder="0" min="0" max="31">
             </div>
         </section>
 
         <section class="controls">
-            <div class="group">
-                <h3>Disminuir</h3>
-                <div class="grid">
-                    <button onclick="procesar('div', 2)">1/2</button>
-                    <button onclick="procesar('div', 3)">1/3</button>
-                    <button onclick="procesar('div', 4)">1/4</button>
-                    <button onclick="procesar('div', 6)">1/6</button>
-                    <button onclick="procesar('div', 7)">1/7</button>
-                </div>
+            <p class="section-title">Disminuir</p>
+            <div class="btn-grid">
+                <button onclick="calcular('div', 2)">1/2</button>
+                <button onclick="calcular('div', 3)">1/3</button>
+                <button onclick="calcular('div', 4)">1/4</button>
+                <button onclick="calcular('div', 6)">1/6</button>
+                <button onclick="calcular('div', 7)">1/7</button>
             </div>
 
-            <div class="group">
-                <h3>Aumentar</h3>
-                <div class="grid">
-                    <button onclick="procesar('mul', 1.5)">1/2</button>
-                    <button onclick="procesar('mul', 1.3333)">1/3</button>
-                    <button onclick="procesar('mul', 2)">Doble</button>
-                </div>
+            <p class="section-title">Aumentar</p>
+            <div class="btn-grid">
+                <button class="btn-alt" onclick="calcular('mul', 1.5)">1/2</button>
+                <button class="btn-alt" onclick="calcular('mul', 1.333)">1/3</button>
+                <button class="btn-alt" onclick="calcular('mul', 2)">Doble</button>
             </div>
         </section>
 
-        <div id="resultArea" class="result-area hidden">
-            <div class="result-content">
-                <small>Resultado (D, M, A):</small>
-                <h2 id="resText"></h2>
+        <div id="resultWrapper" class="result-wrapper hidden">
+            <div class="result-box">
+                <small>Variación:</small>
+                <p id="variacionText"></p>
+                <hr>
+                <small>Resultado Final:</small>
+                <h2 id="finalText"></h2>
             </div>
-            <div class="share-bar">
-                <button class="btn-copy" onclick="copyRes()">Copiar</button>
-                <button class="btn-wa" onclick="shareWA()">WhatsApp</button>
+            <div class="action-bar">
+                <button class="btn-action copy" onclick="copy()">Copiar</button>
+                <button class="btn-action wa" onclick="share()">WhatsApp</button>
             </div>
+            <button class="btn-reset" onclick="resetAll()">Nuevo Cálculo</button>
         </div>
 
         <footer onclick="easterEgg()">
-            <p>© 2026 Víctor Siu</p>
+            <p>© Víctor Siu</p>
         </footer>
     </div>
 
