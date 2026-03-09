@@ -1,16 +1,15 @@
 {
-  "name": "Fraccionador Víctor Siu",
+  "name": "Fraccionador de años",
   "short_name": "Fraccionador",
   "start_url": "./index.html",
   "display": "standalone",
-  "background_color": "#ffffff",
+  "background_color": "#4f46e5",
   "theme_color": "#4f46e5",
   "icons": [
     {
       "src": "logo.png",
       "sizes": "512x512",
-      "type": "image/png",
-      "purpose": "any maskable"
+      "type": "image/png"
     }
   ]
 }
